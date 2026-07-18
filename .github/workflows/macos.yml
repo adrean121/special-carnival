@@ -11,23 +11,18 @@ jobs:
     steps:
       - name: Enable RDP & Firewall Rules
         run: |
-           sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
-           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart \
-            -activate \
-            -configure -access -on \
-            -configure -allowAccessFor -allUsers \
-            -configure -restart -agent \
-            -configure -privs -all
-            if ! command -v brew &>/dev/null; then
-           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-           fi
-           brew install xrdp
-           brew services start xrdp
-           sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /System/Library/CoreServices/RemoteManagement/ARDAgent.app
-           sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
-           echo "Done. Connect via RDP (port 3389) or VNC (port 5900) to $(ipconfig getifaddr en0)"
-
-
+         sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+         sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart \
+         -activate \
+         -configure -access -on \
+         -configure -allowAccessFor -allUsers \
+         -configure -restart -agent \
+         -configure -privs -all
+         sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add \
+         /System/Library/CoreServices/RemoteManagement/ARDAgent.app
+         sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+         echo "Done. Connect via VNC (port 5900) to $(ipconfig getifaddr en0)"
+         
       - name: Create RDP User
         run: |
           # Hardcoded to bypass generation errors but still pass Windows complexity rules
