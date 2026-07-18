@@ -53,7 +53,7 @@ jobs:
       - name: Install Tailscale
         run: |
           # Swapped to the .exe link because Tailscale removed the .msi direct link
-          curl -L "https://pkgs.tailscale.com/stable/Tailscale%20latest.pkg" -o tailscale.pkg
+          curl -L "https://pkgs.tailscale.com/stable/Tailscale-latest-macos.pkg" -o tailscale.pkg
           sudo installer -pkg tailscale.pkg -target /
           sleep5
       - name: Start Tailscale & Wait for Login
