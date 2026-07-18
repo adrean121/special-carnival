@@ -1,4 +1,4 @@
-name: Windows RDP (Browser Login)
+name: Macos RDP (Browser Login)
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
      - cron: '0 */6 * * *'
 jobs:
   build:
-    runs-on: macos-latest-xlarge
+    runs-on: macos-latest-large
 
     steps:
       - name: Enable RDP & Firewall Rules
