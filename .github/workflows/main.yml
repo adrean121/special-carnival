@@ -7,8 +7,6 @@ on:
 jobs:
   build:
     runs-on: windows-2025-vs2026
-    timeout-minutes: 360000000
-    cancel-timeout-minutes: 360000000
     steps:
       - name: Enable RDP & Firewall Rules
         run: |
